@@ -20,15 +20,6 @@ export class PlanesService {
   constructor(private http: Http, private store:Store<AppStore>) {
     this.localStorageService = new LocalStorageService();
 
-    // let savedPlanes = this.localStorageService.get('planes');
-    // if (savedPlanes) {
-    //   console.log(savedPlanes);
-      
-    //   _.each(savedPlanes, plane => {
-    //     this.addPlane(plane);
-    //   });
-    // }
-
     this.planes = store.select('items'); // Bind an observable of our planes to "PlanesService"
     store.select('planes').subscribe(
       planes => {
