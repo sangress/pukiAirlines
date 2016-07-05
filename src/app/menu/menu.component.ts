@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, OnInit  } from '@angular/core';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +7,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
   // templateUrl: 'menu.component.html',
   template: `
   <nav>
-      <span>Puki's Airlines</span>
+      <span class="brand">Puki's Airlines</span>
       <ul>
         <li><a [routerLink]="['/planes']">planes</a></li>
         <li><a [routerLink]="['/planes']">passengers</a></li>
@@ -20,7 +20,9 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() {}
+  constructor(private router: Router) {
+    
+  }
 
   ngOnInit() {
   }

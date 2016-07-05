@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"id": 1, "model": "moshe", "sitsCount" :3},
+        {"id": 2, "model": "lala", "sitsCount" :3},
+        {"id": 3, "model": "papa", "sitsCount" :3}
+    ]
+}

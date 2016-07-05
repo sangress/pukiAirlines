@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {PlaneDetailsComponent} from '../plane-details';
 import {AddPlaneComponent} from '../add-plane';
+import {PlanesService} from './planes.service';
+import {IPlane, AppStore} from '../interfaces';
+import { Observable } from 'rxjs/Observable';
+import {Store} from '@ngrx/store';
+import {LocalStorageService} from '../local-storage.service';
+
+import 'lodash';
+declare let _;
 
 @Component({
   moduleId: module.id,
@@ -8,11 +16,8 @@ import {AddPlaneComponent} from '../add-plane';
   // templateUrl: 'planes.component.html',
   template: `    
     <div class="planes">
-      <!--<div class="add-btn">
-        <span>+ Add Plane</span>
-      </div>-->
       <app-add-plane></app-add-plane>
-      
+
       <table class="table">
         <tr>
           <th>id</th>
@@ -20,12 +25,18 @@ import {AddPlaneComponent} from '../add-plane';
           <th>Sits Count</th>
           <th>Actions</th>
         </tr>
+        
 
         <tr *ngFor="let plane of planes" (click)="onRowSelected(plane)" [class.selected]="plane.isSelected">
           <td>{{plane.id}}</td>
           <td>{{plane.model}}</td>
           <td>{{plane.sitsCount}}</td>
-          <td>{{plane.actions}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="removePlane(plane)">Delete</button>
+            <!--<button class="btn btn-primary" (click)="updatePlane(plane)">Update</button>-->
+            
+            <app-add-plane [plane]="plane" [type]="'update'"></app-add-plane>
+          </td>
         </tr>
       </table>
 
@@ -33,19 +44,35 @@ import {AddPlaneComponent} from '../add-plane';
     </div>  
     `,
   styleUrls: ['planes.component.css'],
-  directives: [PlaneDetailsComponent, AddPlaneComponent]
+  directives: [PlaneDetailsComponent, AddPlaneComponent],
+  providers: [PlanesService]
 })
 export class PlanesComponent implements OnInit {
   details: any;
-  planes = [
-    {id: 1, model: 'B747', sitsCount :3, actions: ''},
-    {id: 2, model: 'A747', sitsCount :3, actions: ''},
-    {id: 3, model: 'F747', sitsCount :3, actions: ''}
-  ]
+  mode = 'Observable';
+  // planes: Observable<{}>;
+  planes: {} = [];
 
-  constructor() {}
+  constructor(private planesService: PlanesService, private store: Store<AppStore>) {
+  }
 
   ngOnInit() {
+    this.store.select('planes').subscribe(
+      planes => this.planes = planes
+    );
+  }
+
+  removePlane(plane: IPlane) {
+    this.details = null;
+    this.planesService.removePlane(plane);
+  }
+
+  updatePlane(plane: IPlane) {
+    this.planesService.updatePlane(plane);
+  }
+
+  getPlane(plane) {
+    return _.clone(plane)
   }
 
   onRowSelected(plane) {

@@ -7,7 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
   template: `
     <div class="plane-details" *ngIf="plane">
       <h2>{{plane.model}} Details</h2>
-      {{plane | json}}
       <table class="plain-table">
         <tr>
           <th>Model</th>

@@ -4,7 +4,11 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'ng2-bootstrap': 'vendor/ng2-bootstrap',
-  'moment': 'vendor/moment'
+  'moment': 'vendor/moment',
+  'angular2-in-memory-web-api': 'vendor/angular2-in-memory-web-api',
+  'lodash': 'vendor/lodash',
+  '@angular/forms': 'vendor/@angular/forms',
+  '@ngrx': 'vendor/@ngrx'
 };
 
 /** User packages configuration. */
@@ -16,6 +20,26 @@ const packages: any = {
   'moment': {
     defaultExtension: 'js',
     main: 'moment.js'
+  },
+  'angular2-in-memory-web-api': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'lodash': {
+    defaultExtension: 'js',
+    main: 'lodash.js'
+  },
+  '@angular/forms': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  '@ngrx/core': {
+    main: 'index.js',
+    format: 'cjs'
+  },
+  '@ngrx/store': {
+    main: 'index.js',
+    format: 'cjs'
   }
 };
 

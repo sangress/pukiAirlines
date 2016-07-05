@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"id": 1, "model": "B747", "sitsCount" :3},
+        {"id": 2, "model": "A747", "sitsCount" :3},
+        {"id": 3, "model": "F747", "sitsCount" :3}
+    ]
+}
