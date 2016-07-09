@@ -1,5 +1,10 @@
+body, height {
+    height: 100%;
+}
+
 body {
     color: #455560;
+    background-color: darken(#fff, 1%);
 }
 
 $tableBorder: 1px solid silver;

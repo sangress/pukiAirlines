@@ -1,0 +1,41 @@
+<button class="btn btn-primary" (click)="lgModal.show();formSubmitted=false">{{title}}</button>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" 
+    [style.display]="showModal ? 'block' : 'none'" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="myLargeModalLabel"
+    (onHide)="handleHide($event, passengerForm)" 
+    aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add passenger</h4>
+      </div>
+      <div class="modal-body" *ngIf="!formSubmitted">
+        <form (ngSubmit)="addPassenger(passengerForm);lgModal.hide()" #passengerForm="ngForm">
+          <div class="form-group">
+            <label for="inputFName">First Name</label>
+            <input type="text" class="form-control" id="inputFName" placeholder="First Name" required [(ngModel)]="passenger.fName" name="fName" #fName="ngModel"/>
+          </div>
+          <div class="form-group">
+            <label for="inputLName">Last Name</label>
+            <input type="text" min="0" class="form-control" id="inputLName" placeholder="Last Name" required [(ngModel)]="passenger.lName" name="lName" #lName="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="inputLBirthdate">Birthdate</label>
+            <input type="date" required min="0" class="form-control" id="inputLBirthdate" placeholder="Birthdate" [(ngModel)]="passenger.birthdate" name="birthdate" #birthdate="ngModel">
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-default" (click)="lgModal.hide()">Cancel</button>
+          </div>
+        </form>      
+      </div>
+    </div>
+  </div>
+</div>

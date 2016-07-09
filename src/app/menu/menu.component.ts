@@ -1,5 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppStore} from '../interfaces';
 
 @Component({
   moduleId: module.id,
@@ -9,9 +11,9 @@ import {ROUTER_DIRECTIVES, Router} from '@angular/router';
   <nav>
       <span class="brand">Puki's Airlines</span>
       <ul>
-        <li><a [routerLink]="['/planes']">planes</a></li>
-        <li><a [routerLink]="['/planes']">passengers</a></li>
-        <li><a [routerLink]="['/planes']">flights</a></li>
+        <li [class.active]="routerState == 'planes'" (click)="updateRoute('planes')"><a [routerLink]="['/planes']">planes</a></li>
+        <li [class.active]="routerState == 'passengers'" (click)="updateRoute('passengers')"><a [routerLink]="['/passengers']">passengers</a></li>
+        <li [class.active]="routerState == 'flights'" (click)="updateRoute('flights')"><a [routerLink]="['/flights']">flights</a></li>
       </ul>
     </nav>
   `,
@@ -19,12 +21,24 @@ import {ROUTER_DIRECTIVES, Router} from '@angular/router';
   directives: [ROUTER_DIRECTIVES]
 })
 export class MenuComponent implements OnInit {
+  routerState: any = {currPath: 'planes'};
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppStore>) {
     
   }
 
   ngOnInit() {
+    this.store.select('routerState').subscribe(
+      routeState => {
+        this.routerState = routeState;
+        console.log(this.routerState);
+        
+      }
+    );
+  }
+
+  updateRoute(route: string) {
+    this.store.dispatch({type: 'UPDATE_ROUTE', payload: route});
   }
 
 }

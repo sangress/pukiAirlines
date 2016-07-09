@@ -11,6 +11,7 @@ declare let _;
 
 @Injectable()
 export class PlanesService {
+  selectedPlane: IPlane;
   planesUrl = 'app/planes';
   // public planes: IPlane[];
   planes: Observable<{}>;
@@ -20,7 +21,7 @@ export class PlanesService {
   constructor(private http: Http, private store:Store<AppStore>) {
     this.localStorageService = new LocalStorageService();
 
-    this.planes = store.select('items'); // Bind an observable of our planes to "PlanesService"
+    this.planes = store.select('planes'); // Bind an observable of our planes to "PlanesService"
     store.select('planes').subscribe(
       planes => {
         // console.log('save', planes);

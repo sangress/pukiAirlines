@@ -4,6 +4,7 @@ import {AddPlaneComponent} from '../add-plane';
 import {PlanesService} from './planes.service';
 import {IPlane, AppStore} from '../interfaces';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import {Store} from '@ngrx/store';
 import {LocalStorageService} from '../local-storage.service';
 
@@ -16,6 +17,7 @@ declare let _;
   // templateUrl: 'planes.component.html',
   template: `    
     <div class="planes">
+      <h1>Planes</h1>
       <app-add-plane></app-add-plane>
 
       <table class="table">
@@ -27,7 +29,7 @@ declare let _;
         </tr>
         
 
-        <tr *ngFor="let plane of planes" (click)="onRowSelected(plane)" [class.selected]="plane.isSelected">
+        <tr *ngFor="let plane of planes | async" (click)="onRowSelected(plane)" [class.selected]="plane.isSelected">
           <td>{{plane.id}}</td>
           <td>{{plane.model}}</td>
           <td>{{plane.sitsCount}}</td>
@@ -35,7 +37,7 @@ declare let _;
             <button class="btn btn-danger" (click)="removePlane(plane)">Delete</button>
             <!--<button class="btn btn-primary" (click)="updatePlane(plane)">Update</button>-->
             
-            <app-add-plane [plane]="plane" [type]="'update'"></app-add-plane>
+            <app-add-plane [plane]="getPlaneClone(plane)" [type]="'update'"></app-add-plane>
           </td>
         </tr>
       </table>
@@ -51,15 +53,16 @@ export class PlanesComponent implements OnInit {
   details: any;
   mode = 'Observable';
   // planes: Observable<{}>;
-  planes: {} = [];
+  // planes: {} = [];
+  planes: Observable<any>;
+  plane: IPlane;
 
   constructor(private planesService: PlanesService, private store: Store<AppStore>) {
+    this.plane = planesService.selectedPlane;
   }
 
   ngOnInit() {
-    this.store.select('planes').subscribe(
-      planes => this.planes = planes
-    );
+    this.planes = this.store.select('planes').map(p => p);
   }
 
   removePlane(plane: IPlane) {
@@ -71,13 +74,14 @@ export class PlanesComponent implements OnInit {
     this.planesService.updatePlane(plane);
   }
 
-  getPlane(plane) {
-    return _.clone(plane)
+  getPlaneClone(plane) {
+    return _.clone(plane);
   }
 
   onRowSelected(plane) {
     // console.log(plane);
-    this.details = plane;    
+    this.details = _.clone(plane);    
+    this.planesService.selectedPlane = plane;
   }
 
 }

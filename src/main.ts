@@ -12,14 +12,14 @@ import { PukiAirlinesAppComponent, environment } from './app/';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import {provideStore} from '@ngrx/store';
-import {PlaneReducer} from './app/app.reducers';
+import {AppReducers} from './app/app.reducers';
 
 if (environment.production) {
   enableProdMode();
 }
 
 bootstrap(PukiAirlinesAppComponent, [
-  provideStore({planes: PlaneReducer}),
+  provideStore(AppReducers),
   disableDeprecatedForms(),
   provideForms(),
   APP_ROUTER_PROVIDERS,

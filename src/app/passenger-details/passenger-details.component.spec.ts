@@ -10,11 +10,11 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { PlaneDetailsComponent } from './plane-details.component';
+import { PassengerDetailsComponent } from './passenger-details.component';
 
-describe('Component: PlaneDetails', () => {
+describe('Component: PassengerDetails', () => {
   it('should create an instance', () => {
-    // let component = new PlaneDetailsComponent();
-    // expect(component).toBeTruthy();
+    let component = new PassengerDetailsComponent();
+    expect(component).toBeTruthy();
   });
 });

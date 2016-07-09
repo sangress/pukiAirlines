@@ -6,6 +6,7 @@ import {IPlane, AppStore} from '../interfaces';
 import {Plane} from '../class/Plane';
 import { NgForm } from '@angular/common';
 import {Store} from '@ngrx/store';
+import {Helper} from '../shared/helper.class';
 
 import 'lodash';
 declare let _;
@@ -17,15 +18,16 @@ declare let _;
   styleUrls: ['add-plane.component.css'],
   directives: [MODAL_DIRECTVES, CORE_DIRECTIVES],
   viewProviders:[BS_VIEW_PROVIDERS],
-  providers: [PlanesService]
+  providers: [PlanesService, Helper]
 })
 export class AddPlaneComponent implements OnInit {
   @Input('plane') plane = new Plane(0, '', 0);
   @Input('type') type = 'primary'; 
   planes: {} = [];
-  title = '+ Add Plane';  
+  title = '+ Add Plane';
+  formSubmitted: boolean = false;  
 
-  constructor(private planesService: PlanesService, private store: Store<AppStore>) {
+  constructor(private planesService: PlanesService, private store: Store<AppStore>, private helper: Helper) {
     
   }
 
@@ -40,14 +42,15 @@ export class AddPlaneComponent implements OnInit {
     
   }
 
-  updatePlane() {
-    this.planesService.updatePlane(this.plane);
+  updatePlane(planeForm) {
+    let plane = this.helper.extractFormValues(planeForm.controls, this.plane.id);
+    this.planesService.updatePlane(plane);
     this.plane = new Plane(0, '', 0); // reset
   }
   
-  addPlane() {    
+  addPlane(planeForm?) {    
     if (this.type == 'update') {
-      return this.updatePlane();
+      return this.updatePlane(planeForm);
     }
 
     this.plane.id = this.generateId();
@@ -57,5 +60,11 @@ export class AddPlaneComponent implements OnInit {
 
   generateId() {
     return _.get(_.last(this.planes), 'id', 0) + 1;
+  }
+
+  handleHide(evt, passengerForm) {
+    this.formSubmitted = true;
+    this.plane = new Plane(0, '', 0);
+    
   }
 }

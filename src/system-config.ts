@@ -67,6 +67,9 @@ const barrels: string[] = [
   'app/plane-details',
   'app/add-plane',
   'app/menu',
+  'app/passengers',
+  'app/passenger-details',
+  'app/edit-passenger',
   /** @cli-barrel */
 ];
 

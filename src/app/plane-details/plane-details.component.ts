@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import {PlanesService} from '../planes/planes.service';
+import {IPlane, AppStore} from '../interfaces';
 
 @Component({
   moduleId: module.id,
@@ -19,16 +21,23 @@ import { Component, OnInit, Input } from '@angular/core';
           <td>{{plane.sitsCount}}</td>
           <td>No Available Flights</td>
         </tr>
-      </table>
+      </table>      
     </div>
 
+
   `,
-  styleUrls: ['plane-details.component.css']
+  styleUrls: ['plane-details.component.css'],
+  providers: [PlanesService]
 })
 export class PlaneDetailsComponent implements OnInit {
   @Input('plane') plane: any;
+  @Output('upPlane') upPlane: any;
+  sPlane: IPlane;
 
-  constructor() {}
+  constructor(private planesService: PlanesService) {
+    // this.plane = this.planesService.selectedPlane;
+    this.sPlane = planesService.selectedPlane;
+  }
 
   ngOnInit() {
   }

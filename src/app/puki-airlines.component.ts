@@ -8,8 +8,7 @@ import {MenuComponent} from './menu';
   // templateUrl: 'puki-airlines.component.html',
   template: `
     <app-menu></app-menu>
-    <div class="container-fluid">
-      <h1>The new Puki's Airlines</h1>
+    <div class="container-fluid">      
       <router-outlet></router-outlet>
     </div>
   `,

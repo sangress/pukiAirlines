@@ -1,6 +1,6 @@
-<button class="btn btn-primary" (click)="lgModal.show()">{{title}}</button>
+<button class="btn btn-primary" (click)="lgModal.show();formSubmitted=false">{{title}}</button>
 
-<div bsModal #lgModal="bs-modal" class="modal fade" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div bsModal #lgModal="bs-modal" (onHide)="handleHide($event, planeForm)" class="modal fade" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,9 +9,9 @@
         </button>
         <h4 class="modal-title">Add Plane</h4>
       </div>
-      <div class="modal-body">
-        <form (ngSubmit)="addPlane();lgModal.hide()" #planeForm="ngForm">
-          <div class="form-group" ngControlGroup="model">
+      <div class="modal-body" *ngIf="!formSubmitted">
+        <form (ngSubmit)="addPlane(planeForm);lgModal.hide()" #planeForm="ngForm">
+          <div class="form-group">
             <label for="inputModel">Model</label>
             <input type="text" class="form-control" id="inputModel" placeholder="Model" required [(ngModel)]="plane.model" name="model" #model="ngModel"/>
           </div>
@@ -20,7 +20,8 @@
             <input type="number" min="0" class="form-control" id="inputSitsCount" placeholder="Sits Count" [(ngModel)]="plane.sitsCount" name="sitsCount" #model="ngModel">
           </div>
 
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" class="btn btn-default" (click)="lgModal.hide()">Cancel</button>
         </form>      
       </div>
     </div>
