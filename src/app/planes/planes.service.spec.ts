@@ -11,8 +11,8 @@ import { PlanesService } from './planes.service';
 describe('Planes Service', () => {
   beforeEachProviders(() => [PlanesService]);
 
-  it('should ...',
-      inject([PlanesService], (service: PlanesService) => {
-    expect(service).toBeTruthy();
-  }));
+  // it('should ...',
+  //     inject([PlanesService], (service: PlanesService) => {
+  //   expect(service).toBeTruthy();
+  // }));
 });
