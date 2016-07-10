@@ -11,6 +11,7 @@ import {AppStore} from '../interfaces';
   <nav>
       <span class="brand">Puki's Airlines</span>
       <ul>
+        <li [class.active]="routerState == 'home'" (click)="updateRoute('home')"><a [routerLink]="['/home']">home</a></li>
         <li [class.active]="routerState == 'planes'" (click)="updateRoute('planes')"><a [routerLink]="['/planes']">planes</a></li>
         <li [class.active]="routerState == 'passengers'" (click)="updateRoute('passengers')"><a [routerLink]="['/passengers']">passengers</a></li>
         <li [class.active]="routerState == 'flights'" (click)="updateRoute('flights')"><a [routerLink]="['/flights']">flights</a></li>
@@ -21,7 +22,7 @@ import {AppStore} from '../interfaces';
   directives: [ROUTER_DIRECTIVES]
 })
 export class MenuComponent implements OnInit {
-  routerState: any = {currPath: 'planes'};
+  routerState: any = {currPath: 'home'};
 
   constructor(private router: Router, private store: Store<AppStore>) {
     

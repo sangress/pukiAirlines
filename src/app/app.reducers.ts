@@ -1,7 +1,7 @@
 import {ActionReducer, Action} from '@ngrx/store';
 import {LocalStorageService} from './local-storage.service';
 
-const defaultRoute = 'planes';
+const defaultRoute = 'home';
 const planesInitialState = [];
 const passengersInitialState = [];
 

@@ -62,6 +62,7 @@ export class PlanesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch({type: 'UPDATE_ROUTE', payload: 'planes'});
     this.planes = this.store.select('planes').map(p => p);
   }
 

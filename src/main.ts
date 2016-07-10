@@ -13,12 +13,16 @@ import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import {provideStore} from '@ngrx/store';
 import {AppReducers} from './app/app.reducers';
+import {AuthGuard} from './app/auth.guard';
+import {AuthService} from './app/auth.service';
 
 if (environment.production) {
   enableProdMode();
 }
 
 bootstrap(PukiAirlinesAppComponent, [
+  AuthService,
+  AuthGuard,
   provideStore(AppReducers),
   disableDeprecatedForms(),
   provideForms(),

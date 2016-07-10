@@ -70,6 +70,8 @@ const barrels: string[] = [
   'app/passengers',
   'app/passenger-details',
   'app/edit-passenger',
+  'app/home',
+  'app/login',
   /** @cli-barrel */
 ];
 
