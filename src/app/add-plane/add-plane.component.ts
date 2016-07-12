@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 import {PlanesService} from '../planes/planes.service';
@@ -23,6 +23,7 @@ declare let _;
 export class AddPlaneComponent implements OnInit {
   @Input('plane') plane = new Plane(0, '', 0);
   @Input('type') type = 'primary'; 
+  @ViewChild('lgModal') lgModal: any;
   planes: {} = [];
   title = '+ Add Plane';
   formSubmitted: boolean = false;  
@@ -42,15 +43,25 @@ export class AddPlaneComponent implements OnInit {
     
   }
 
-  updatePlane(planeForm) {
-    let plane = this.helper.extractFormValues(planeForm.controls, this.plane.id);
-    this.planesService.updatePlane(plane);
+    ngAfterViewInit() {
+    this.store.select('editPlane').subscribe((p:IPlane) => {
+      // first time we get empty object
+      if (!_.isEmpty(p)) {
+        this.plane = p;     
+        this.lgModal.show();
+      }      
+    });
+  }
+
+
+  updatePlane() {    
+    this.planesService.updatePlane(this.plane);
     this.plane = new Plane(0, '', 0); // reset
   }
   
-  addPlane(planeForm?) {    
-    if (this.type == 'update') {
-      return this.updatePlane(planeForm);
+  addPlane() {    
+    if (this.plane.id !== 0) {
+      return this.updatePlane();
     }
 
     this.plane.id = this.generateId();

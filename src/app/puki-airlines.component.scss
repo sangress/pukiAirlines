@@ -1,0 +1,21 @@
+.app-container {
+    height: 100%;
+    display: flex;
+
+    
+    router-outlet {
+        flex: 0;
+        
+        &+ * {
+            flex: 1;
+        }
+    }
+
+    .side-bar {
+        flex: 0 1 auto;
+        width: 200px;
+        border-right: 2px solid silver;
+        height: 100%;
+    }
+}
+

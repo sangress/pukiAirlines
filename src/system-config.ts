@@ -8,7 +8,9 @@ const map: any = {
   'angular2-in-memory-web-api': 'vendor/angular2-in-memory-web-api',
   'lodash': 'vendor/lodash',
   '@angular/forms': 'vendor/@angular/forms',
-  '@ngrx': 'vendor/@ngrx'
+  '@ngrx': 'vendor/@ngrx',
+  'nvd3': 'vendor/nvd3/build',
+  'd3': 'vendor/d3'
 };
 
 /** User packages configuration. */
@@ -40,6 +42,14 @@ const packages: any = {
   '@ngrx/store': {
     main: 'index.js',
     format: 'cjs'
+  },
+  'nvd3': {
+    main: 'nv.d3.js',
+    defaultExtension: 'js'
+  },
+  'd3': {    
+    main: 'd3.js',
+    defaultExtension: 'js'
   }
 };
 
@@ -72,6 +82,7 @@ const barrels: string[] = [
   'app/edit-passenger',
   'app/home',
   'app/login',
+  'app/charts/pie-chart',
   /** @cli-barrel */
 ];
 

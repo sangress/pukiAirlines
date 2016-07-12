@@ -9,8 +9,8 @@
         </button>
         <h4 class="modal-title">Add Plane</h4>
       </div>
-      <div class="modal-body" *ngIf="!formSubmitted">
-        <form (ngSubmit)="addPlane(planeForm);lgModal.hide()" #planeForm="ngForm">
+      <div class="modal-body">
+        <form (ngSubmit)="addPlane();lgModal.hide()" #planeForm="ngForm">
           <div class="form-group">
             <label for="inputModel">Model</label>
             <input type="text" class="form-control" id="inputModel" placeholder="Model" required [(ngModel)]="plane.model" name="model" #model="ngModel"/>

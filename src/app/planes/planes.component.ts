@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Store} from '@ngrx/store';
 import {LocalStorageService} from '../local-storage.service';
+import {Plane} from '../class/Plane';
 
 import 'lodash';
 declare let _;
@@ -36,8 +37,8 @@ declare let _;
           <td>
             <button class="btn btn-danger" (click)="removePlane(plane)">Delete</button>
             <!--<button class="btn btn-primary" (click)="updatePlane(plane)">Update</button>-->
-            
-            <app-add-plane [plane]="getPlaneClone(plane)" [type]="'update'"></app-add-plane>
+                        
+            <button class="btn btn-primary" (click)="editPlane(plane)">Update</button>
           </td>
         </tr>
       </table>
@@ -80,9 +81,17 @@ export class PlanesComponent implements OnInit {
   }
 
   onRowSelected(plane) {
-    // console.log(plane);
     this.details = _.clone(plane);    
     this.planesService.selectedPlane = plane;
+  }
+
+  editPlane(plane: IPlane) {
+    this.store.dispatch({type: 'EDIT_PLANE', payload: plane});
+  }
+
+  newPlane() {
+    let plane:IPlane = new Plane(0, '', 0);
+    this.store.dispatch({type: 'EDIT_PLANE', payload: plane});
   }
 
 }

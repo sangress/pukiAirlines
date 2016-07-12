@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import {AppStore, IPassnger} from '../interfaces';
 import {EditPassengerComponent} from '../edit-passenger';
 import {PassengersService} from './passengers.service';
+import {Passenger} from '../class/Passenger.class';
 
 import 'lodash';
 declare let _;
@@ -16,6 +17,8 @@ declare let _;
     <div class="planes">
       <h1>Passengers</h1>
       <app-edit-passenger></app-edit-passenger>
+      
+      <button class="btn btn-primary" (click)="newPassenger()">Add Passenger</button>
 
       <table class="table">
         <tr>
@@ -32,7 +35,7 @@ declare let _;
           <td>{{passenger.birthdate | date}}</td>
           <td>
             <button class="btn btn-danger" (click)="removePassenger(passenger)">Delete</button>
-            <app-edit-passenger [passenger]="getPassenger(passenger)" [mode]="'edit'"></app-edit-passenger>              
+            <button class="btn btn-primary" (click)="editPassenger(passenger)">Update</button>                          
           </td>
         </tr>
       </table>
@@ -74,6 +77,15 @@ export class PassengersComponent implements OnInit {
 
   handleHide(evt) {
     console.log(evt);    
+  }
+
+  editPassenger(passenger: IPassnger) {
+    this.store.dispatch({type: 'EDIT_PASSENGER', payload: passenger});    
+  }
+
+  newPassenger() {
+    let passenger:IPassnger = new Passenger(0, '', '', '');
+    this.store.dispatch({type: 'EDIT_PASSENGER', payload: passenger});
   }
 
 }

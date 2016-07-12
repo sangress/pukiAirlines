@@ -15,7 +15,7 @@ import {AppStore} from '../interfaces';
         <li [class.active]="routerState == 'planes'" (click)="updateRoute('planes')"><a [routerLink]="['/planes']">planes</a></li>
         <li [class.active]="routerState == 'passengers'" (click)="updateRoute('passengers')"><a [routerLink]="['/passengers']">passengers</a></li>
         <li [class.active]="routerState == 'flights'" (click)="updateRoute('flights')"><a [routerLink]="['/flights']">flights</a></li>
-      </ul>
+      </ul>      
     </nav>
   `,
   styleUrls: ['menu.component.css'],

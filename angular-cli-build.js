@@ -16,7 +16,14 @@ module.exports = function(defaults) {
       'ng2-bootstrap/**/*.js',
       'moment/moment.js',
       'angular2-in-memory-web-api/**/*.js',
-      'lodash/*.js'
+      'lodash/*.js',
+      'nvd3/build/*.js',
+      'nvd3/build/*.css',
+      'bootstrap/dist/css/*.css',
+      'd3/**/*.js'
+
+      // 'nvd3/src/**/*.js',
+      // 'nvd3/src/**/*.css'
     ]
   });
 };

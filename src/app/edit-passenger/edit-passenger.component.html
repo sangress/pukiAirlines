@@ -1,22 +1,24 @@
-<button class="btn btn-primary" (click)="lgModal.show();formSubmitted=false">{{title}}</button>
+<!--<button class="btn btn-primary" (click)="lgModal.show();formSubmitted=false">{{title}}</button>-->
+<!--<button class="btn btn-primary" (click)="handleClick()">{{title}}</button>-->
+
 
 <div bsModal #lgModal="bs-modal" class="modal fade" 
-    [style.display]="showModal ? 'block' : 'none'" 
+    [hidden]="showModal" 
     tabindex="-1" 
     role="dialog" 
     aria-labelledby="myLargeModalLabel"
     (onHide)="handleHide($event, passengerForm)" 
     aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Add passenger</h4>
+        <h4 class="modal-title">Passenger</h4>
       </div>
-      <div class="modal-body" *ngIf="!formSubmitted">
-        <form (ngSubmit)="addPassenger(passengerForm);lgModal.hide()" #passengerForm="ngForm">
+      <div class="modal-body">
+        <form (ngSubmit)="addPassenger();lgModal.hide()" #passengerForm="ngForm">
           <div class="form-group">
             <label for="inputFName">First Name</label>
             <input type="text" class="form-control" id="inputFName" placeholder="First Name" required [(ngModel)]="passenger.fName" name="fName" #fName="ngModel"/>
@@ -34,7 +36,7 @@
             <button type="submit" class="btn btn-success">Save</button>
             <button type="button" class="btn btn-default" (click)="lgModal.hide()">Cancel</button>
           </div>
-        </form>      
+        </form>    
       </div>
     </div>
   </div>

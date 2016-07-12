@@ -4,6 +4,8 @@ import {LocalStorageService} from './local-storage.service';
 const defaultRoute = 'home';
 const planesInitialState = [];
 const passengersInitialState = [];
+const editPassengerInitialState = {};
+const editPlaneInitialState = {};
 
 import 'lodash';
 declare let _;
@@ -67,8 +69,38 @@ export const PassengerReducer:ActionReducer<any> = (state:any = passengersInitia
   }
 }
 
+export const EditPassengerReducer:ActionReducer<any> = (state:any = editPassengerInitialState, {type, payload}) => {
+    switch (type) {
+    case 'EDIT_PASSENGER': 
+        console.log('state', payload);
+                   
+      return _.clone(payload);   
+ 
+    case 'RESET_PASSENGER':
+        return {};
+
+    default:
+      return state;
+  }
+}
+
+export const EditPlaneReducer:ActionReducer<any> = (state:any = editPlaneInitialState, {type, payload}) => {
+    switch (type) {
+    case 'EDIT_PLANE':
+      return _.clone(payload);   
+ 
+    case 'RESET_PLANE':
+        return {};
+
+    default:
+      return state;
+  }
+}
+
 export const AppReducers = {
     planes: PlaneReducer, 
     routerState: RouteReducer, 
-    passengers: PassengerReducer
+    passengers: PassengerReducer,
+    editPassenger: EditPassengerReducer,
+    editPlane: EditPlaneReducer
 }
