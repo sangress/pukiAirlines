@@ -14,3 +14,11 @@ export interface IPassnger {
 export interface AppStore {
     planes: IPlane[]
 }
+
+export interface IFlight {
+    id: number;
+    date: any;
+    source: string;
+    destination: string;
+    plane: IPlane
+}

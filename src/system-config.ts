@@ -83,6 +83,8 @@ const barrels: string[] = [
   'app/home',
   'app/login',
   'app/charts/pie-chart',
+  'app/flights',
+  'app/edit-flight',
   /** @cli-barrel */
 ];
 

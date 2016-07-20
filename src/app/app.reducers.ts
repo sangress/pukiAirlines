@@ -6,6 +6,7 @@ const planesInitialState = [];
 const passengersInitialState = [];
 const editPassengerInitialState = {};
 const editPlaneInitialState = {};
+const flightsInitialState = [];
 
 import 'lodash';
 declare let _;
@@ -97,10 +98,29 @@ export const EditPlaneReducer:ActionReducer<any> = (state:any = editPlaneInitial
   }
 }
 
+export const FlightReducer:ActionReducer<any> = (state:any = flightsInitialState, {type, payload}) => {
+    switch (type) {
+    case 'ADD_FLIGHT':            
+      return [...state, payload];   
+
+    case 'REMOVE_FLIGHT': 
+      return state.filter(plane => plane !== payload);
+
+    case 'UPDATE_FLIGHT':
+        return state.map(flight => {
+            return flight.id === payload.id ? _.merge({}, flight, payload) : flight;
+        });  
+
+    default:
+      return localStorageService.get('flights') || state;
+  }
+}
+
 export const AppReducers = {
     planes: PlaneReducer, 
     routerState: RouteReducer, 
     passengers: PassengerReducer,
     editPassenger: EditPassengerReducer,
-    editPlane: EditPlaneReducer
+    editPlane: EditPlaneReducer,
+    flights: FlightReducer
 }

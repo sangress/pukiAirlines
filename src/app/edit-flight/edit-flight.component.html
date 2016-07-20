@@ -1,0 +1,36 @@
+<button class="btn btn-primary" (click)="lgModal.show();formSubmitted=false">{{title}}</button>
+
+<div bsModal #lgModal="bs-modal" (onHide)="handleHide($event, planeForm)" class="modal fade" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Flight</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addFlight();lgModal.hide()" #planeForm="ngForm">
+          <div class="form-group">
+            <label for="inputSource">Source</label>
+            <input type="text" class="form-control" id="inputSource" placeholder="Source" required [(ngModel)]="flight.source" name="source" #source="ngModel"/>
+          </div>
+          <div class="form-group">
+            <label for="inputDest">Destination</label>
+            <input type="text" class="form-control" id="inputDest" placeholder="Destination" required [(ngModel)]="flight.destination" name="destination" #destination="ngModel"/>
+          </div>          
+          <div class="form-group">
+            <label for="inputDate">Date</label>
+            <input type="date" required min="0" class="form-control" id="inputDate" placeholder="Date" [(ngModel)]="flight.date" name="date" #date="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="inputPlane">Plane</label>
+            <input type="text" class="form-control" id="inputPlane" placeholder="Plane" required [(ngModel)]="flight.plane" name="plane" #plane="ngModel"/>
+          </div>          
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" class="btn btn-default" (click)="lgModal.hide()">Cancel</button>
+        </form>      
+      </div>
+    </div>
+  </div>
+</div>
